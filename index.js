@@ -95,7 +95,7 @@ function nextlvl () {
     boxes = document.querySelectorAll('.arrow');
     
     curlevel += 1;
-    if(curlevel%2 === 0){
+    if(curlevel%3 === 0){
         k += 1;
     }
 
