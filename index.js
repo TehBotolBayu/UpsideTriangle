@@ -4,6 +4,7 @@ var state = [0, 0, 0, 0]
 var curlevel=1;
 var k = 1;
 var size = 0;
+var s=2;
 
 for(let i=size; i<n; i++){
     addskewer();
@@ -95,8 +96,9 @@ function nextlvl () {
     boxes = document.querySelectorAll('.arrow');
     
     curlevel += 1;
-    if(curlevel%3 === 0){
+    if(curlevel%s === 0){
         k += 1;
+        s+=2;
     }
 
     l = document.getElementById('level');
@@ -115,3 +117,32 @@ function reset(){
 }
 
 
+function hint(n, k){
+
+    let mini= k+1, maxi= 2*k+1;
+
+    let steps= parseInt((n-1)/maxi+1);
+
+    let f= n%maxi, diff;
+
+    if(f==0)
+        diff= 1+k;
+    else if(f<=mini)
+        diff= 1;
+    else
+        diff= 1+f-mini;
+
+    boxes[diff-1].style.borderBottom = '100px solid red';
+    console.log(diff)
+    steps--;
+
+    while(steps--){
+        diff+= maxi;
+        console.log(diff)
+        boxes[diff-1].style.borderBottom = '100px solid red';
+    }
+
+}
+
+let hintbt = document.querySelectorAll("#hint");
+hintbt[0].addEventListener('click', () => hint(n, k-1));
